@@ -1,0 +1,24 @@
+#!/bin/bash
+sudo apt update
+sudo apt upgrade
+sudo apt install apache2 -y
+sudo apt install libapache2-mod-wsgi-py3
+sudo apt install python3 python3-venv python3-pip
+sudo sed -i '/<\/VirtualHost>/ i Alias /static /home/pi/pidjango/static\n\
+    <Directory /home/pi/pidjango/static>\n\
+        Require all granted\n\
+    </Directory>\n\n\
+    <Directory /home/pi/pidjango/pidjango>\n\
+        <Files wsgi.py>\n\  
+            Require all granted\n\
+        </Files>\n\
+    </Directory>\n\n\
+    WSGIDaemonProcess django python-path=/home/pi/pidjango python-home=/home/pi/pidjango/djenv\n\
+    WSGIProcessGroup django\n\
+    WSGIScriptAlias / /home/pi/pidjango/pidjango/wsgi.py' /etc/apache2/sites-enabled/000-default.conf
+sudo systemctl restart apache2
+mkdir -p /home/pi/pidjango/static
+cd /home/pi/pidjango
+python3 -m venv djenv
+django-admin startproject pidjango .
+echo 'installation completed'
