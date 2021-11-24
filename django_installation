@@ -9,5 +9,14 @@ sudo systemctl restart apache2
 mkdir -p /home/pi/pidjango/static
 cd /home/pi/pidjango
 python3 -m venv djenv
-django-admin startproject pidjango .
-echo 'installation completed'
+source djenv/bin/activate
+django-admin startproject pidjango
+cd pidjango/pidjango
+sudo sed -i "28 c\ALLOWED_HOSTS = [\'*\']" settings.py
+sudo sed -i "s/raspberrypi/$1/g" /etc/hosts
+sudo sed -i "s/raspberrypi/$1/g" /etc/hostname
+echo 'setup complete rebooting...'
+sudo reboot
+#cd ..
+#python3 manage.py runserver 0.0.0.0:8000
+#echo 'dev server running'
