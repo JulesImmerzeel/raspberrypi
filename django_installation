@@ -12,11 +12,7 @@ python3 -m venv djenv
 source djenv/bin/activate
 django-admin startproject pidjango
 cd pidjango/pidjango
-sudo sed -i "28 c\ALLOWED_HOSTS = [\'*\']" settings.py
 sudo sed -i "s/raspberrypi/$1/g" /etc/hosts
 sudo sed -i "s/raspberrypi/$1/g" /etc/hostname
 echo 'setup complete rebooting...'
 sudo reboot
-#cd ..
-#python3 manage.py runserver 0.0.0.0:8000
-#echo 'dev server running'
