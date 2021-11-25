@@ -14,6 +14,7 @@ pip3 install django
 pip3 install Adafruit_DHT
 django-admin startproject pidjango
 cd pidjango/pidjango
+sudo sed -i "28 c\ALLOWED_HOSTS = [\'*\']" settings.py
 sudo sed -i "s/raspberrypi/$1/g" /etc/hosts
 sudo sed -i "s/raspberrypi/$1/g" /etc/hostname
 echo 'setup complete rebooting...'
