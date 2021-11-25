@@ -10,8 +10,8 @@ mkdir -p /home/pi/pidjango/static
 cd /home/pi/pidjango
 python3 -m venv djenv
 source djenv/bin/activate
-sudo pip3 install django
-sudo pip3 install Adafruit_DHT
+pip3 install django
+pip3 install Adafruit_DHT
 django-admin startproject pidjango
 cd pidjango/pidjango
 sudo sed -i "s/raspberrypi/$1/g" /etc/hosts
